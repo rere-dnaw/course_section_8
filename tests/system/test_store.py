@@ -21,7 +21,8 @@ class TestStore(BaseTest):
 
                 self.assertIsNotNone(StoreModel.find_by_name('store_test'))
                 self.assertEqual(response.status_code, 201)
-                self.assertDictEqual({'name': 'store_test',
+                self.assertDictEqual({'store_id': 1,
+                                      'name': 'store_test',
                                       'items': [],
                                       },
                                      json.loads(response.data))
@@ -55,7 +56,7 @@ class TestStore(BaseTest):
 
                 self.assertIsNone(StoreModel.find_by_name('store_test'))
 
-                self.assertEqual(200,resp.status_code)
+                self.assertEqual(200, resp.status_code)
                 self.assertEqual({'message': 'Store deleted'}, json.loads(resp.data))
 
     def test_find_store(self):
@@ -71,7 +72,8 @@ class TestStore(BaseTest):
                 store = client.get('store/test_store')
 
                 self.assertEqual(200, store.status_code)
-                self.assertEqual({'name': 'test_store',
+                self.assertEqual({'store_id': 1,
+                                  'name': 'test_store',
                                   'items': []},
                                  json.loads(store.data))
 
@@ -103,14 +105,13 @@ class TestStore(BaseTest):
                 store = client.get('store/test_store')
 
                 self.assertEqual(200, store.status_code)
-                self.assertDictEqual({'name': 'test_store',
+                self.assertDictEqual({'store_id': 1,
+                                      'name': 'test_store',
                                       'items': [{'name': 'test_item',
                                                  'price': 10.99,
                                                  }]
                                       },
                                      json.loads(store.data))
-
-
 
     def test_store_list(self):
         """
@@ -138,7 +139,8 @@ class TestStore(BaseTest):
                 store_list = client.get('/stores')
 
                 self.assertEqual(200, store_list.status_code)
-                self.assertDictEqual({'stores': [{'name': 'test_store',
+                self.assertDictEqual({'stores': [{'store_id': 1,
+                                                  'name': 'test_store',
                                                   'items': [{'name': 'test_item',
                                                              'price': 10.99,
                                                              }]}]}, json.loads(store_list.data))
