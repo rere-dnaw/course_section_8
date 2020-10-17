@@ -9,5 +9,5 @@ class TestUserModel(BaseTestUnit):
         """
         Init test
         """
-        self.assertEqual(self.user1.user_name, 'Ben')
-        self.assertEqual(self.user1.user_password, 'big')
+        self.assertEqual(self.user1.username, 'Ben')
+        self.assertEqual(self.user1.password, 'big')
